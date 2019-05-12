@@ -55,8 +55,24 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.Y);
             logAllKeysHook.HookedKeys.Add(Keys.Z);
             logAllKeysHook.HookedKeys.Add(Keys.LControlKey);
+            logAllKeysHook.HookedKeys.Add(Keys.RControlKey);
+            logAllKeysHook.HookedKeys.Add(Keys.LShiftKey);
+            logAllKeysHook.HookedKeys.Add(Keys.RShiftKey);
+            logAllKeysHook.HookedKeys.Add(Keys.D0);
+            logAllKeysHook.HookedKeys.Add(Keys.D1);
+            logAllKeysHook.HookedKeys.Add(Keys.D2);
+            logAllKeysHook.HookedKeys.Add(Keys.D3);
+            logAllKeysHook.HookedKeys.Add(Keys.D4);
+            logAllKeysHook.HookedKeys.Add(Keys.D5);
+            logAllKeysHook.HookedKeys.Add(Keys.D6);
+            logAllKeysHook.HookedKeys.Add(Keys.D7);
+            logAllKeysHook.HookedKeys.Add(Keys.D8);
+            logAllKeysHook.HookedKeys.Add(Keys.D9);
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
+
+            //init shortcut key
+            checkShortcut.HookedKeys.Add(Keys.A);
         }
 
         void logAll_keyUp(object sender, KeyEventArgs e)
