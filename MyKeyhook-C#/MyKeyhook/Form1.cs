@@ -14,6 +14,8 @@ namespace MyKeyhook
     public partial class Form1 : Form
     {
         Boolean loggingKeys = false;
+        Boolean f1 = false;
+        Boolean f4 = false;
         globalKeyboardHook logAllKeysHook;
         globalKeyboardHook checkShortcut;
 
@@ -21,7 +23,7 @@ namespace MyKeyhook
         {
             InitializeComponent();
             logAllKeysHook = new globalKeyboardHook();
-           // logAllKeysHook.unhook();
+            logAllKeysHook.unhook();
             checkShortcut = new globalKeyboardHook();
         }
 
@@ -68,17 +70,62 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.D7);
             logAllKeysHook.HookedKeys.Add(Keys.D8);
             logAllKeysHook.HookedKeys.Add(Keys.D9);
+            logAllKeysHook.HookedKeys.Add(Keys.Space);
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
 
             //init shortcut key
-            checkShortcut.HookedKeys.Add(Keys.A);
+            checkShortcut.HookedKeys.Add(Keys.F1);
+            checkShortcut.HookedKeys.Add(Keys.F4);
+            checkShortcut.KeyDown += new KeyEventHandler(checkShortcut_down);
+            checkShortcut.KeyUp += new KeyEventHandler(checkShortcut_up);
         }
 
         void logAll_keyUp(object sender, KeyEventArgs e)
         {
-            myTxt.AppendText("Pressed\t" + e.KeyCode.ToString() +"\n");
+            myTxt.AppendText("Pressed\t" + e.KeyCode.ToString() + "\n");
         }
 
+        void checkShortcut_down(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                f1 = true;
+                
+            }
+
+            if (e.KeyCode == Keys.F4)
+            {
+                f4 = true;
+                
+            }
+
+        }
+        void checkShortcut_up(object sender, KeyEventArgs e)
+        {
+            if (f1 && f4)
+            {
+                toggleLog();
+            }
+
+            f1 = false;
+            f4 = false;
+            
+
+        }
+
+        void toggleLog()
+        {
+            if (!loggingKeys)
+            {
+                logAllKeysHook.hook();
+                loggingKeys = true;
+            }
+            else
+            {
+                logAllKeysHook.unhook();
+                loggingKeys = false;
+            }
+        }
     }
 }
