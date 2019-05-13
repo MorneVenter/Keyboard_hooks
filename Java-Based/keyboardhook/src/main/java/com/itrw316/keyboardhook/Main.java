@@ -2,26 +2,16 @@ package com.itrw316.keyboardhook;
 
 import java.awt.GridLayout;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import org.jnativehook.GlobalScreen;
@@ -73,7 +63,7 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
         panel.add(mouseMove);
         setupMouse();      
         panel.add(fileSelect);
-        updateDirectory("Keyboard output file not selected!");
+        updateDirectory("<html><font color='blue'>Keyboard output file not selected!</font>");
         add(panel);
         setSize(400, 200);
         setResizable(false);
