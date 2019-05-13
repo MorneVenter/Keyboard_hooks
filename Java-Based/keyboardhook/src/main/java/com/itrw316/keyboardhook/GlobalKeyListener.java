@@ -5,6 +5,8 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -12,13 +14,16 @@ import org.jnativehook.keyboard.SwingKeyAdapter;
 import org.jnativehook.keyboard.NativeKeyAdapter;
 import org.jnativehook.mouse.NativeMouseEvent;
 
+import java.io.File;
+
 public class GlobalKeyListener implements NativeKeyListener {
 	boolean capslock = false;
 	boolean shift = false;
 	GlobalMouseListener mouse;
 	int mouseSteps = 10;
 	boolean f1 = false;
-    boolean f4 = false;
+	boolean f4 = false;
+	boolean f5 = false;
 	boolean ctrl = false;
 	boolean listen = false;
 	Main ui;
@@ -82,6 +87,16 @@ public class GlobalKeyListener implements NativeKeyListener {
 				} catch (Exception m) {	}
 			} else if (keyP == "Escape") {
 			} else if (keyP == "Tab") {
+			} else if (keyP == "F5") {
+				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+				int returnValue = jfc.showOpenDialog(null);
+				// int returnValue = jfc.showSaveDialog(null);
+
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = jfc.getSelectedFile();
+					ui.updateDirectory(selectedFile.getAbsolutePath());
+				}
 			} else if (keyP == "F1") {
                         	f1 = true;
 			} else if (keyP == "F4") {
@@ -105,7 +120,17 @@ public class GlobalKeyListener implements NativeKeyListener {
 			}
 		} else {
 			if (keyP == "F1") {
-                        	f1 = true;
+							f1 = true;
+						} else if (keyP == "F5") {
+							JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			
+							int returnValue = jfc.showOpenDialog(null);
+							// int returnValue = jfc.showSaveDialog(null);
+			
+							if (returnValue == JFileChooser.APPROVE_OPTION) {
+								File selectedFile = jfc.getSelectedFile();
+								ui.updateDirectory(selectedFile.getAbsolutePath());
+							}
 			} else if (keyP == "F4") {
                         	f4 = true;
 				if(ctrl && f1 && f4) {

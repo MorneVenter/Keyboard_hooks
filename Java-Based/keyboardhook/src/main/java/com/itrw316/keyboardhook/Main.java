@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +34,7 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
     JLabel active = new JLabel();
     JLabel shortcut = new JLabel();
     JLabel mouseMove = new JLabel();
-    JButton fileSelect = new JButton();
+    JLabel fileSelect = new JLabel();
     JLabel fileDir = new JLabel();
     boolean updateUI = false;
 
@@ -65,10 +68,12 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
         updateActive(false);
         panel.add(shortcut);
         setupShortcut();
-        panel.add(mouseMove);
-        setupMouse();
-        panel.add(fileSelect);
         panel.add(fileDir);
+        setupDirShortcut();
+        panel.add(mouseMove);
+        setupMouse();      
+        panel.add(fileSelect);
+        updateDirectory("Keyboard output file not selected!");
         add(panel);
         setSize(400, 200);
         setResizable(false);
@@ -120,12 +125,25 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
         shortcut.setText("Shortcut: CTRL + F1 + F4");
     }
 
+    public void setupDirShortcut() {
+        fileDir.setText("Output File: CTRL + F1 + F5");
+    }
+
     public void updateActive(boolean activated) {
         if (activated) {
             active.setText("<html>Status: <font color='green'>ACTIVATED</font>");
+            updateUI = true;
         } else {
             active.setText("<html>Status: <font color='red'>DEACTIVATED</font>");
+            updateUI = false;
         }
+        revalidate();
+        repaint();
+    }
+
+    public void updateDirectory(String s) {
+        //fileSelect.setText("<html><font color='blue'>"+ s +"</font>");
+        fileSelect.setText(s);
         revalidate();
         repaint();
     }
