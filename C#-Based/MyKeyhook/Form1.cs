@@ -60,10 +60,6 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.X);
             logAllKeysHook.HookedKeys.Add(Keys.Y);
             logAllKeysHook.HookedKeys.Add(Keys.Z);
-            logAllKeysHook.HookedKeys.Add(Keys.LControlKey);
-            logAllKeysHook.HookedKeys.Add(Keys.RControlKey);
-            logAllKeysHook.HookedKeys.Add(Keys.LShiftKey);
-            logAllKeysHook.HookedKeys.Add(Keys.RShiftKey);
             //init number keys
             logAllKeysHook.HookedKeys.Add(Keys.D0);
             logAllKeysHook.HookedKeys.Add(Keys.D1);
@@ -75,7 +71,6 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.D7);
             logAllKeysHook.HookedKeys.Add(Keys.D8);
             logAllKeysHook.HookedKeys.Add(Keys.D9);
-            logAllKeysHook.HookedKeys.Add(Keys.Space);
             //add more keys to logAllKeysHook here please ----------------------------------------------------------------------------------------------------
             //init numpad keys
             logAllKeysHook.HookedKeys.Add(Keys.NumPad0);
@@ -101,6 +96,20 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.PageUp);
             logAllKeysHook.HookedKeys.Add(Keys.Home);
             logAllKeysHook.HookedKeys.Add(Keys.Insert);
+            //init function keys
+            logAllKeysHook.HookedKeys.Add(Keys.F1);
+            logAllKeysHook.HookedKeys.Add(Keys.F2);
+            logAllKeysHook.HookedKeys.Add(Keys.F3);
+            logAllKeysHook.HookedKeys.Add(Keys.F4);
+            logAllKeysHook.HookedKeys.Add(Keys.F5);
+            logAllKeysHook.HookedKeys.Add(Keys.F6);
+            logAllKeysHook.HookedKeys.Add(Keys.F7);
+            logAllKeysHook.HookedKeys.Add(Keys.F8);
+            logAllKeysHook.HookedKeys.Add(Keys.F9);
+            logAllKeysHook.HookedKeys.Add(Keys.F10);
+            logAllKeysHook.HookedKeys.Add(Keys.F11);
+            logAllKeysHook.HookedKeys.Add(Keys.F12);
+            
 
 
             //------------------------------------------------------------------------------------------------------------------------------------------------
