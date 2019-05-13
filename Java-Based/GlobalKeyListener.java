@@ -12,7 +12,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 	boolean capslock = false;
 	boolean shift = false;
 	GlobalMouseListener mouse;
-	int mouseSteps = 2;
+	int mouseSteps = 10;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
