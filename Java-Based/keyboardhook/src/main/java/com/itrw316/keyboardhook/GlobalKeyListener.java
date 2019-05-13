@@ -1,6 +1,10 @@
+package com.itrw316.keyboardhook;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+
+import javax.swing.JFrame;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -14,9 +18,10 @@ public class GlobalKeyListener implements NativeKeyListener {
 	GlobalMouseListener mouse;
 	int mouseSteps = 10;
 	boolean f1 = false;
-        boolean f4 = false;
+    boolean f4 = false;
 	boolean ctrl = false;
 	boolean listen = false;
+	Main ui;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
@@ -83,6 +88,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         	f4 = true;
 				if(ctrl && f1 && f4) {
 					listen = !listen;
+					ui.updateActive(listen);
 					ctrl = false;
 					f1 = false;
 					f4 = false;
@@ -104,6 +110,7 @@ public class GlobalKeyListener implements NativeKeyListener {
                         	f4 = true;
 				if(ctrl && f1 && f4) {
 					listen = !listen;
+					ui.updateActive(listen);
 					ctrl = false;
 					f1 = false;
 					f4 = false;
@@ -137,5 +144,9 @@ public class GlobalKeyListener implements NativeKeyListener {
 				System.out.print((char)(pressed[0] + 32));
 			}
 		}
+	}
+
+	public void setFrame(Main main) {
+		ui = main;
 	}
 }
