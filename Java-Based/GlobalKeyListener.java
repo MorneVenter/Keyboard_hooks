@@ -13,88 +13,111 @@ public class GlobalKeyListener implements NativeKeyListener {
 	boolean shift = false;
 	GlobalMouseListener mouse;
 	int mouseSteps = 10;
+	boolean f1 = false;
+        boolean f4 = false;
+	boolean ctrl = false;
+	boolean listen = false;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
-		if (keyP == "Enter") {
-			System.out.print("\n");
-		} else if (keyP == "Space") {
-			System.out.print(" ");
-		} else if (keyP == "Caps Lock") {
-			capslock = !capslock;
-		} else if (keyP == "Shift" || NativeKeyEvent.getKeyText(e.getKeyCode()) == "Unknown keyCode: 0xe36") {
-			shift = true;	
-		} else if (keyP == "Minus") {
-			System.out.print("-");
-		} else if (keyP == "Equals") {
-			System.out.print("=");
-		} else if (keyP == "Quote") {
-			if (shift) {
-				System.out.print("\"");
-				shift = false;
+		if(listen) {
+			if (keyP == "Enter") {
+				System.out.print("\n");
+			} else if (keyP == "Space") {
+				System.out.print(" ");
+			} else if (keyP == "Caps Lock") {
+				capslock = !capslock;
+			} else if (keyP == "Shift" || NativeKeyEvent.getKeyText(e.getKeyCode()) == "Unknown keyCode: 0xe36") {
+				shift = true;
+			} else if (keyP == "Minus") {
+				System.out.print("-");
+			} else if (keyP == "Equals") {
+				System.out.print("=");
+			} else if (keyP == "Quote") {
+				if (shift) {
+					System.out.print("\"");
+					shift = false;
+				} else {
+					System.out.print("'");
+			}
+			} else if (keyP == "Back Slash") {
+				System.out.print("\\");
+			} else if (keyP == "Slash") {
+				System.out.print("/");
+			} else if (keyP == "Page Down") {
+			} else if (keyP == "Page Up") {
+			} else if (keyP == "End") {
+			} else if (keyP == "Home") {
+			} else if (keyP == "Print Screen") {
+			} else if (keyP == "Backspace") {
+			} else if (keyP == "Clear") {
+			} else if (keyP == "Up") {
+				try {
+					Robot robot = new Robot();
+					int[] xy = mouse.getCoordinates();
+					robot.mouseMove(xy[0], xy[1] - mouseSteps); // check if it is inverted for other OSes
+				} catch (Exception m) {	}
+			} else if (keyP == "Down") {
+				try {
+					Robot robot = new Robot();
+					int[] xy = mouse.getCoordinates();
+					robot.mouseMove(xy[0], xy[1] + mouseSteps); // check if it is inverted for other OSes
+				} catch (Exception m) {	}
+			} else if (keyP == "Left") {
+				try {
+					Robot robot = new Robot();
+					int[] xy = mouse.getCoordinates();
+					robot.mouseMove(xy[0] - mouseSteps, xy[1]); // check if it is inverted for other OSes
+				} catch (Exception m) {	}
+			} else if (keyP == "Right") {
+				try {
+					Robot robot = new Robot();
+					int[] xy = mouse.getCoordinates();
+					robot.mouseMove(xy[0] + mouseSteps, xy[1]); // check if it is inverted for other OSes
+				} catch (Exception m) {	}
+			} else if (keyP == "Escape") {
+			} else if (keyP == "Tab") {
+			} else if (keyP == "F1") {
+                        	f1 = true;
+			} else if (keyP == "F4") {
+                        	f4 = true;
+				if(ctrl && f1 && f4) {
+					listen = !listen;
+					ctrl = false;
+					f1 = false;
+					f4 = false;
+				}
+			} else if (keyP == "Ctrl") {
+				ctrl = true;
 			} else {
-				System.out.print("'");
+				if (shift) {
+					alphabet(!capslock, keyP);
+					shift = false;
+				} else {
+					alphabet(capslock, keyP);
+				}
 			}
-		} else if (keyP == "Back Slash") {
-			System.out.print("\\");
-		} else if (keyP == "Slash") {
-			System.out.print("/");
-		} else if (keyP == "Page Down") {
-		} else if (keyP == "Page Up") {
-		} else if (keyP == "End") {
-		} else if (keyP == "Home") {
-		} else if (keyP == "Print Screen") {
-		} else if (keyP == "Backspace") {
-		} else if (keyP == "Clear") {
-		} else if (keyP == "Up") {
-			try {
-				Robot robot = new Robot();
-				int[] xy = mouse.getCoordinates();
-				robot.mouseMove(xy[0], xy[1] - mouseSteps); // check if it is inverted for other OSes
-			} catch (Exception m) {
-				
-			}
-		} else if (keyP == "Down") {
-			try {
-				Robot robot = new Robot();
-				int[] xy = mouse.getCoordinates();
-				robot.mouseMove(xy[0], xy[1] + mouseSteps); // check if it is inverted for other OSes
-			} catch (Exception m) {
-				
-			}
-		} else if (keyP == "Left") {
-			try {
-				Robot robot = new Robot();
-				int[] xy = mouse.getCoordinates();
-				robot.mouseMove(xy[0] - mouseSteps, xy[1]); // check if it is inverted for other OSes
-			} catch (Exception m) {
-				
-			}
-		} else if (keyP == "Right") {
-			try {
-				Robot robot = new Robot();
-				int[] xy = mouse.getCoordinates();
-				robot.mouseMove(xy[0] + mouseSteps, xy[1]); // check if it is inverted for other OSes
-			} catch (Exception m) {
-				
-			}
-		} else if (keyP == "Escape") {
-		} else if (keyP == "Tab") {
-		} else if (keyP == "Ctrl") {
-		} else {		
-			if (shift) {
-				alphabet(!capslock, keyP);
-				shift = false;
-			} else {
-				alphabet(capslock, keyP);
-			}
-		}
+		} else {
+			if (keyP == "F1") {
+                        	f1 = true;
+			} else if (keyP == "F4") {
+                        	f4 = true;
+				if(ctrl && f1 && f4) {
+					listen = !listen;
+					ctrl = false;
+					f1 = false;
+					f4 = false;
+				}
+			} else if (keyP == "Ctrl") {
+				ctrl = true;
+			}	
+		}	
 	}
 
 	public void nativeKeyReleased(NativeKeyEvent e) {
 		// can be used to overwrite when key is released
 	}
-	
+
 	public void nativeKeyTyped(NativeKeyEvent e) {
 		// can be used to overwrite when key is typed
 	}
@@ -102,7 +125,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 	public void setMouse(GlobalMouseListener m) {
 		mouse = m;
 	}
-	
+
 	public void alphabet(boolean logic, String keyPressed) {
 		if (logic) {
 			System.out.print(keyPressed);
