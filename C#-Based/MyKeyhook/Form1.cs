@@ -123,12 +123,11 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.RMenu);
             logAllKeysHook.HookedKeys.Add(Keys.Return);
             logAllKeysHook.HookedKeys.Add(Keys.Back);
-            //init punctuation keys
-            logAllKeysHook.HookedKeys.Add(Keys.OemPipe);
-            logAllKeysHook.HookedKeys.Add(Keys.OemBackslash);
-
-
-
+            logAllKeysHook.HookedKeys.Add(Keys.Escape);
+            //init lock keys
+            logAllKeysHook.HookedKeys.Add(Keys.PrintScreen);
+            logAllKeysHook.HookedKeys.Add(Keys.Pause);
+            logAllKeysHook.HookedKeys.Add(Keys.Scroll);
             //------------------------------------------------------------------------------------------------------------------------------------------------
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
