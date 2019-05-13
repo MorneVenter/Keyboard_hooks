@@ -75,6 +75,10 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.D8);
             logAllKeysHook.HookedKeys.Add(Keys.D9);
             logAllKeysHook.HookedKeys.Add(Keys.Space);
+            //add more keys to logAllKeysHook here please ----------------------------------------------------------------------------------------------------
+            //
+            //
+            //------------------------------------------------------------------------------------------------------------------------------------------------
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
 
