@@ -1,18 +1,18 @@
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 import org.jnativehook.keyboard.NativeKeyAdapter;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.jnativehook.mouse.NativeMouseEvent;
 
 public class GlobalKeyListener implements NativeKeyListener {
 	boolean capslock = false;
 	boolean shift = false;
+	GlobalMouseListener mouse;
+	int mouseSteps = 2;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
@@ -47,9 +47,37 @@ public class GlobalKeyListener implements NativeKeyListener {
 		} else if (keyP == "Backspace") {
 		} else if (keyP == "Clear") {
 		} else if (keyP == "Up") {
+			try {
+				Robot robot = new Robot();
+				int[] xy = mouse.getCoordinates();
+				robot.mouseMove(xy[0], xy[1] - mouseSteps); // check if it is inverted for other OSes
+			} catch (Exception m) {
+				
+			}
 		} else if (keyP == "Down") {
+			try {
+				Robot robot = new Robot();
+				int[] xy = mouse.getCoordinates();
+				robot.mouseMove(xy[0], xy[1] + mouseSteps); // check if it is inverted for other OSes
+			} catch (Exception m) {
+				
+			}
 		} else if (keyP == "Left") {
+			try {
+				Robot robot = new Robot();
+				int[] xy = mouse.getCoordinates();
+				robot.mouseMove(xy[0] - mouseSteps, xy[1]); // check if it is inverted for other OSes
+			} catch (Exception m) {
+				
+			}
 		} else if (keyP == "Right") {
+			try {
+				Robot robot = new Robot();
+				int[] xy = mouse.getCoordinates();
+				robot.mouseMove(xy[0] + mouseSteps, xy[1]); // check if it is inverted for other OSes
+			} catch (Exception m) {
+				
+			}
 		} else if (keyP == "Escape") {
 		} else if (keyP == "Tab") {
 		} else if (keyP == "Ctrl") {
@@ -66,27 +94,15 @@ public class GlobalKeyListener implements NativeKeyListener {
 	public void nativeKeyReleased(NativeKeyEvent e) {
 		// can be used to overwrite when key is released
 	}
-
+	
 	public void nativeKeyTyped(NativeKeyEvent e) {
 		// can be used to overwrite when key is typed
 	}
 
-	public static void main(String[] args) {
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-		logger.setLevel(Level.OFF); // turns logger off on console output
-		logger.setUseParentHandlers(false);
-		try {
-			GlobalScreen.registerNativeHook();
-		}
-		catch (NativeHookException ex) {
-			System.err.println("There was a problem registering the native hook.");
-			System.err.println(ex.getMessage());
-
-			System.exit(1);
-		}
-		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
+	public void setMouse(GlobalMouseListener m) {
+		mouse = m;
 	}
-
+	
 	public void alphabet(boolean logic, String keyPressed) {
 		if (logic) {
 			System.out.print(keyPressed);
