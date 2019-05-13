@@ -5,7 +5,6 @@ import java.awt.Robot;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileView;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -94,15 +93,19 @@ public class GlobalKeyListener implements NativeKeyListener {
 					break;
 				case "Ctrl":
 					ctrl = true;
+					shortcut();
 					break;
 				case "F1":
 					f1 = true;
+					shortcut();
 					break;
 				case "F4":
-					shortcutF4();
+					f4 = true;
+					shortcut();
 					break;
 				case "F5":
-					shortcutF5();
+					f5 = true;
+					shortcut();
 					break;
 				default:
 					if (shift) {
@@ -117,15 +120,19 @@ public class GlobalKeyListener implements NativeKeyListener {
 			switch (keyP) {
 				case "Ctrl":
 					ctrl = true;
+					shortcut();
 					break;
 				case "F1":
 					f1 = true;
+					shortcut();
 					break;
 				case "F4":
-					shortcutF4();
+					f4 = true;
+					shortcut();
 					break;
 				case "F5":
-					shortcutF5();
+					f5 = true;
+					shortcut();
 					break;
 				default:
 					System.out.println(keyP);
@@ -187,7 +194,25 @@ public class GlobalKeyListener implements NativeKeyListener {
 		}
 	}
 
-	public void nativeKeyReleased(NativeKeyEvent e) { /* not implemented */ }
+	public void nativeKeyReleased(NativeKeyEvent e) { 
+		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
+		switch (keyP) {
+			case "Ctrl":
+				ctrl = false;
+				break;
+			case "F1":
+				f1 = false;
+				break;
+			case "F4":
+				f4 = false;
+				break;
+			case "F5":
+				f5 = false;
+				break;
+			default:
+				break;
+		}
+	}
 
 	public void nativeKeyTyped(NativeKeyEvent e) { /* not implemented */ }
 
@@ -195,26 +220,14 @@ public class GlobalKeyListener implements NativeKeyListener {
 		mouse = m;
 	}
 
-	public void shortcutF4() {
-		f4 = true;
+	public void shortcut() {
+		if(ctrl && f1 && f5) {
+			selectFile();
+		}
 		if(ctrl && f1 && f4) {
 			listen = !listen;
 			ui.updateActive(listen);	
 		} 
-		ctrl = false;
-		f1 = false;
-		f4 = false;
-	}
-
-	public void shortcutF5() {
-		f5 = true;
-		if(ctrl && f1 && f5) {
-			selectFile();
-			
-		}
-		ctrl = false;
-		f1 = false;
-		f5 = false;
 	}
 
 	public void writeAlphabet(boolean logic, String keyPressed) {
