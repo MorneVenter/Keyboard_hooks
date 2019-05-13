@@ -71,7 +71,6 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.D7);
             logAllKeysHook.HookedKeys.Add(Keys.D8);
             logAllKeysHook.HookedKeys.Add(Keys.D9);
-            //add more keys to logAllKeysHook here please ----------------------------------------------------------------------------------------------------
             //init numpad keys
             logAllKeysHook.HookedKeys.Add(Keys.NumPad0);
             logAllKeysHook.HookedKeys.Add(Keys.NumPad1);
@@ -128,7 +127,6 @@ namespace MyKeyhook
             logAllKeysHook.HookedKeys.Add(Keys.PrintScreen);
             logAllKeysHook.HookedKeys.Add(Keys.Pause);
             logAllKeysHook.HookedKeys.Add(Keys.Scroll);
-            //------------------------------------------------------------------------------------------------------------------------------------------------
 
             logAllKeysHook.KeyUp += new KeyEventHandler(logAll_keyUp);
 
