@@ -6,6 +6,6 @@
 cd keyboardhook
 mvn package
 cd target
-mv *.jar ../..
+mv *dependencies.jar ../..
 cd ../..
 chmod +x *jar
