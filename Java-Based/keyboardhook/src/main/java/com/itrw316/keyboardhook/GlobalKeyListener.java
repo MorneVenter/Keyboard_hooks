@@ -1,7 +1,5 @@
 package com.itrw316.keyboardhook;
 
-import java.awt.Robot;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileFilter;
@@ -141,7 +139,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 		}	
 	}
 
-	enum mouseDirections {
+	public enum mouseDirections {
 		UP, 
 		DOWN,
 		RIGHT,
@@ -149,20 +147,17 @@ public class GlobalKeyListener implements NativeKeyListener {
 	}
 
 	public void moveMouse(mouseDirections selected) {
-		try {
-			Robot robot = new Robot();
-			int[] xy = mouse.getCoordinates();
-			if (mouseDirections.UP == selected) {
-				robot.mouseMove(xy[0], xy[1] - mouseSteps);
-			} else if (mouseDirections.DOWN == selected) {
-				robot.mouseMove(xy[0], xy[1] + mouseSteps); 
-			} else if (mouseDirections.LEFT == selected) {
-				robot.mouseMove(xy[0] - mouseSteps, xy[1]);
-			} else {
-				robot.mouseMove(xy[0] + mouseSteps, xy[1]); 
-			}
-			robot.mouseMove(xy[0], xy[1] - mouseSteps);
-		} catch (Exception e) { }
+		String move = "";
+		if (mouseDirections.UP == selected) {
+			move = "UP";
+		} else if (mouseDirections.DOWN == selected) {
+			move = "DOWN";
+		} else if (mouseDirections.LEFT == selected) {
+			move = "LEFT";
+		} else {
+			move = "RIGHT";
+		}
+		ui.postMouseMove(mouse.returnNativeMouseEvent(move)); 
 		
 	}
 

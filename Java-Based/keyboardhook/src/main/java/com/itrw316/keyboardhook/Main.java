@@ -19,6 +19,7 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.dispatcher.SwingDispatchService;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+import org.jnativehook.mouse.NativeMouseEvent;
 
 public class Main extends JFrame implements NativeKeyListener, WindowListener {
     JLabel active = new JLabel();
@@ -82,7 +83,6 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
 			System.err.println("There was a problem registering the native hook.");
 			System.err.println(ex.getMessage());
 			ex.printStackTrace();
-
 			System.exit(1);
 		}
 
@@ -131,8 +131,11 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
         repaint();
     }
 
+    public void postMouseMove(NativeMouseEvent event) {
+        GlobalScreen.postNativeEvent(event);
+    }
+
     public void updateDirectory(String s) {
-        //fileSelect.setText("<html><font color='blue'>"+ s +"</font>");
         fileSelect.setText(s);
         revalidate();
         repaint();
