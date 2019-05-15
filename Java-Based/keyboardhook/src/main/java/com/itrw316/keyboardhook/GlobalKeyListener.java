@@ -89,10 +89,6 @@ public class GlobalKeyListener implements NativeKeyListener {
 				case "Right":
 					moveMouse(mouseDirections.RIGHT);
 					break;
-				case "Ctrl":
-					ctrl = true;
-					shortcut();
-					break;
 				case "F1":
 					f1 = true;
 					shortcut();
@@ -116,10 +112,6 @@ public class GlobalKeyListener implements NativeKeyListener {
 			}
 		} else {
 			switch (keyP) {
-				case "Ctrl":
-					ctrl = true;
-					shortcut();
-					break;
 				case "F1":
 					f1 = true;
 					shortcut();
@@ -192,9 +184,6 @@ public class GlobalKeyListener implements NativeKeyListener {
 	public void nativeKeyReleased(NativeKeyEvent e) { 
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
 		switch (keyP) {
-			case "Ctrl":
-				ctrl = false;
-				break;
 			case "F1":
 				f1 = false;
 				break;
@@ -216,10 +205,10 @@ public class GlobalKeyListener implements NativeKeyListener {
 	}
 
 	public void shortcut() {
-		if(ctrl && f1 && f5) {
+		if(f1 && f5) {
 			selectFile();
 		}
-		if(ctrl && f1 && f4) {
+		if(f1 && f4) {
 			listen = !listen;
 			ui.updateActive(listen);	
 		} 

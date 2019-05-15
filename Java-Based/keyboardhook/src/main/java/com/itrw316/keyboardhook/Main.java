@@ -112,11 +112,11 @@ public class Main extends JFrame implements NativeKeyListener, WindowListener {
     }
 
     public void setupShortcut() {
-        shortcut.setText("Shortcut: CTRL + F1 + F4");
+        shortcut.setText("Shortcut: F1 + F4");
     }
 
     public void setupDirShortcut() {
-        fileDir.setText("Output File: CTRL + F1 + F5");
+        fileDir.setText("Output File: F1 + F5");
     }
 
     public void updateActive(boolean activated) {
