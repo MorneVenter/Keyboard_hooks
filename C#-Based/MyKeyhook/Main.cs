@@ -13,8 +13,10 @@ using System.Threading;
 
 namespace MyKeyhook
 {
+   
     public partial class SuspiciousApp : Form
     {
+        Thread t;
         Boolean loggingKeys = false;
         Boolean f1 = false;
         Boolean f4 = false;
@@ -33,7 +35,8 @@ namespace MyKeyhook
             labelStatus.Text = "DEACTIVATED";
             labelStatus.ForeColor = Color.Red;
             labelPath.Text = path;
-            //writeCursor();
+            t = new Thread(new ThreadStart(writeCursor));
+            t.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -223,11 +226,24 @@ namespace MyKeyhook
             Cursor.Position = new Point(Cursor.Position.X - x, Cursor.Position.Y - y);
         }
 
+        void updateMouse(String s)
+        {
+            lblMouse.Text = s;
+        }
+
         private void writeCursor()
         {
             while(true)
-                lblMouse.Text = Cursor.Position.ToString();
-                
+            {
+                Invoke(new MethodInvoker(delegate () { updateMouse(Cursor.Position.ToString()); }));
+                Thread.Sleep(100);
+            }
+
+        }
+
+        private void SuspiciousApp_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
         }
     }
 }
