@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
 using System.IO;
+using System.Threading;
 
 namespace MyKeyhook
 {
@@ -32,6 +33,7 @@ namespace MyKeyhook
             labelStatus.Text = "DEACTIVATED";
             labelStatus.ForeColor = Color.Red;
             labelPath.Text = path;
+            //writeCursor();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -219,6 +221,13 @@ namespace MyKeyhook
         {
             Cursor = new Cursor(Cursor.Current.Handle);
             Cursor.Position = new Point(Cursor.Position.X - x, Cursor.Position.Y - y);
+        }
+
+        private void writeCursor()
+        {
+            while(true)
+                lblMouse.Text = Cursor.Position.ToString();
+                
         }
     }
 }

@@ -34,9 +34,12 @@
             this.labelShortcut = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelPath = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblMouse = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelStatus
@@ -96,18 +99,38 @@
             this.labelPath.TabIndex = 0;
             this.labelPath.Text = "F1 + F4";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lblMouse);
+            this.groupBox4.Location = new System.Drawing.Point(12, 144);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(305, 38);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Mouse Coordinates";
+            // 
+            // lblMouse
+            // 
+            this.lblMouse.AutoSize = true;
+            this.lblMouse.Location = new System.Drawing.Point(6, 16);
+            this.lblMouse.Name = "lblMouse";
+            this.lblMouse.Size = new System.Drawing.Size(48, 13);
+            this.lblMouse.TabIndex = 0;
+            this.lblMouse.Text = "Mouse...";
+            // 
             // SuspiciousApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 150);
+            this.ClientSize = new System.Drawing.Size(329, 194);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(345, 189);
-            this.MinimumSize = new System.Drawing.Size(345, 189);
+            this.MaximumSize = new System.Drawing.Size(345, 233);
+            this.MinimumSize = new System.Drawing.Size(345, 233);
             this.Name = "SuspiciousApp";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -119,6 +142,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -130,6 +155,8 @@
         private System.Windows.Forms.Label labelShortcut;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label labelPath;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lblMouse;
     }
 }
 
