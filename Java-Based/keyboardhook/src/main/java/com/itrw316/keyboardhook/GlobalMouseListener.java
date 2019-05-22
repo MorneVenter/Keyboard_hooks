@@ -2,6 +2,7 @@ package com.itrw316.keyboardhook;
 
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
+import java.awt.Robot;
 
 public class GlobalMouseListener implements NativeMouseInputListener {
 	int x = 0;
@@ -42,27 +43,23 @@ public class GlobalMouseListener implements NativeMouseInputListener {
 		return this;
 	}
 
-	public NativeMouseEvent returnNativeMouseEvent(String selected) {
-		int X = x;
-		int Y = y;
-		//System.out.println("(" + X + "," + Y + ")");
-		if ("UP" == selected) {
-			Y = y - mouseSteps;
-		} else if ("DOWN" == selected) {
-			Y = y + mouseSteps; 
-		} else if ("LEFT" == selected) {
-			X = x - mouseSteps;
-		} else {
-			X = x + mouseSteps; 
-		}
-		//System.out.println("(" + X + "," + Y + ")");
-		return new NativeMouseEvent(
-			NativeMouseEvent.NATIVE_MOUSE_MOVED,
-			0x00,	// Modifiers
-			X,		// X
-			Y,		// Y
-			0,		// Click Count
-			NativeMouseEvent.NOBUTTON);
+	public void executeMouseEvent(String selected) {
+		try {
+			Robot robot = new Robot();
+			int X = x;
+			int Y = y;
+			if ("UP" == selected) {
+				Y = y - mouseSteps;
+			} else if ("DOWN" == selected) {
+				Y = y + mouseSteps; 
+			} else if ("LEFT" == selected) {
+				X = x - mouseSteps;
+			} else {
+				X = x + mouseSteps; 
+			}
+			robot.mouseMove(X,Y);
+		} catch (Exception e) {}
+
 	}
 
 	public enum mouseDirections {

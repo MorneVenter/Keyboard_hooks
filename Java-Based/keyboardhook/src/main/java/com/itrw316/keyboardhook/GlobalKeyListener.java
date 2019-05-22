@@ -7,9 +7,9 @@ import javax.swing.filechooser.FileFilter;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 
 public class GlobalKeyListener implements NativeKeyListener {
@@ -27,8 +27,23 @@ public class GlobalKeyListener implements NativeKeyListener {
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		String keyP = NativeKeyEvent.getKeyText(e.getKeyCode());
-		if(listen) {
 			switch (keyP) {
+				case "Unknown keyCode: 0xe4e":
+					writeOther("+");
+					break;
+				case "Unknown keyCode: 0xe4a":
+					writeOther("-");
+					break;
+				case "Print Screen":
+					break;
+				case "Num Lock":
+					break;
+				case "Undefined":
+					break;
+				case "Insert":
+					break;
+				case "Delete":
+					break;
 				case "Enter":
 					writeOther("\n");
 					break;
@@ -41,8 +56,39 @@ public class GlobalKeyListener implements NativeKeyListener {
 				case "Shift":
 					shift = true;
 					break;
+				case "Unknown keyCode: 0xe36":
+					shift = true;
+					break;
+				case "Semicolon":
+					writeOther(";");
+					break;
 				case "Minus":
-					writeOther("-");
+					if (shift) {
+						writeOther("=");
+					} else {
+						writeOther("-");
+					}
+					break;
+				case "Back Quote":
+					if (shift) {
+						writeOther("`");
+					} else {
+						writeOther("@");
+					}
+					break;
+				case "Open Bracket":
+					if (shift) {
+						writeOther("{");
+					} else {
+						writeOther("[");
+					}
+					break;
+				case "Close Bracket":
+					if (shift) {
+						writeOther("}");
+					} else {
+						writeOther("]");
+					}
 					break;
 				case "Equals":
 					writeOther("=");
@@ -50,7 +96,6 @@ public class GlobalKeyListener implements NativeKeyListener {
 				case "Quote":
 					if (shift) {
 						writeOther("\"");
-						shift = false;
 					} else {
 						writeOther("'");
 					}
@@ -69,13 +114,104 @@ public class GlobalKeyListener implements NativeKeyListener {
 					break;
 				case "Home":
 					break;
+				case "Ctrl":
+					break;
 				case "Escape":
+					break;
+				case "Alt":
 					break;
 				case "Tab":
 					break;
 				case "Backspace":
 					break;
+				case "Period":
+					if (shift) {
+						writeOther(">");
+					} else {
+						writeOther(".");
+					}
+					break;
+				case "Comma":
+					if (shift) {
+						writeOther("<");
+					} else {
+						writeOther(",");
+					}
+					break;
 				case "Clear":
+					break;
+				case "1":
+					if (shift) {
+						writeOther("!");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "2":
+					if (shift) {
+						writeOther("\"");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "3":
+					if (shift) {
+						writeOther("#");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "4":
+					if (shift) {
+						writeOther("$");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "5":
+					if (shift) {
+						writeOther("%");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "6":
+					if (shift) {
+						writeOther("&");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "7":
+					if (shift) {
+						writeOther("'");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "8":
+					if (shift) {
+						writeOther("(");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "9":
+					if (shift) {
+						writeOther(")");
+					} else {
+						writeOther(keyP);
+					}
+					break;
+				case "0":
+					if (!shift) {
+						writeOther("0");
+					}
+					break;
+				case "P":
+					if (!shift) {
+						writeOther("0");
+					}
 					break;
 				case "Up":
 					moveMouse(mouseDirections.UP);
@@ -92,43 +228,26 @@ public class GlobalKeyListener implements NativeKeyListener {
 				case "F1":
 					f1 = true;
 					shortcut();
+					writeOther(keyP);
 					break;
 				case "F4":
 					f4 = true;
 					shortcut();
+					writeOther(keyP);
 					break;
 				case "F5":
 					f5 = true;
 					shortcut();
+					writeOther(keyP);
 					break;
 				default:
 					if (shift) {
 						writeAlphabet(!capslock, keyP);
-						shift = false;
 					} else {
 						writeAlphabet(capslock, keyP);
 					}
 					break;
-			}
-		} else {
-			switch (keyP) {
-				case "F1":
-					f1 = true;
-					shortcut();
-					break;
-				case "F4":
-					f4 = true;
-					shortcut();
-					break;
-				case "F5":
-					f5 = true;
-					shortcut();
-					break;
-				default:
-					System.out.println(keyP);
-					break;
-			}
-		}	
+			}	
 	}
 
 	public enum mouseDirections {
@@ -149,7 +268,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 		} else {
 			move = "RIGHT";
 		}
-		ui.postMouseMove(mouse.returnNativeMouseEvent(move)); 
+		mouse.executeMouseEvent(move); 
 		
 	}
 
@@ -193,6 +312,12 @@ public class GlobalKeyListener implements NativeKeyListener {
 			case "F5":
 				f5 = false;
 				break;
+			case "Shift":
+				shift = false;
+				break;
+			case "Unknown keyCode: 0xe36":
+				shift = false;
+				break;
 			default:
 				break;
 		}
@@ -232,15 +357,20 @@ public class GlobalKeyListener implements NativeKeyListener {
 	}
 
 	public void write(String s) {
-		try {
-			while (filename.isEmpty() || filename.isBlank()) {
+		if (listen) {
+			while (filename.isEmpty()) {
 				selectFile();
 			}
-			BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
-    		writer.append(s);
-    		writer.close();
-		} catch (IOException e) { 
-		} catch (Exception ex) { }
+			try {
+				FileWriter write = new FileWriter(filename, true);
+				PrintWriter print = new PrintWriter(write);
+				print.print(s);
+				print.close();
+			} catch (IOException e) { 
+			} catch (Exception ex) { }
+		} else {
+			System.out.println(s);
+		}
 	}
 
 	public void setFrame(Main main) {
